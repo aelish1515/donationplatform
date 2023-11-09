@@ -202,6 +202,6 @@ def profile():
    return render_template("profile.html",nm=nm,email=email,contact=contact,password=password)
 
 if __name__ == '__main__':
-    app.secret_key = secret_key
+    app.secret_key = secret_key  # Set the secret key here
     # Turn off debug mode
     app.run(host='0.0.0.0', port=port, debug=False)
