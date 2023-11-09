@@ -9,6 +9,16 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from datetime import date,time, datetime
 import sqlite3 as sql
 import os
+
+import secrets
+
+#For secrete key 
+def generate_secret_key():
+    return secrets.token_urlsafe(16)  # Generate a 16-byte URL-safe text string
+
+secret_key = generate_secret_key()
+
+
 # Create Database if it doesnt exist
 if not os.path.isfile('database.db'):
   conn = sql.connect('database.db')
@@ -192,6 +202,6 @@ def profile():
    return render_template("profile.html",nm=nm,email=email,contact=contact,password=password)
 
 if __name__ == '__main__':
-    app.secret_key = ".."
+    app.secret_key = secret_key
     # Turn off debug mode
     app.run(host='0.0.0.0', port=port, debug=False)
