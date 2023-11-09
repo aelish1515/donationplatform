@@ -5,10 +5,14 @@ Created on Sat Mar 17 15:40:29 2018
 @author: Kaushik
 """
 
+
 from flask import Flask, render_template, request, session, redirect, url_for
 from datetime import date,time, datetime
 import sqlite3 as sql
 import os
+
+
+
 # Create Database if it doesnt exist
 if not os.path.isfile('database.db'):
   conn = sql.connect('database.db')
@@ -16,9 +20,10 @@ if not os.path.isfile('database.db'):
   conn.execute('CREATE TABLE IF NOT EXISTS Users (Name TEXT NOT NULL, Email TEXT NOT NULL, Password TEXT NOT NULL, Contact INTEGER NOT NULL)')
   conn.close()
 
-app = Flask(__name__,static_url_path='/assets',
-            static_folder='assets', 
-            template_folder='./')
+app = Flask(__name__, static_url_path='/assets', static_folder='assets', template_folder='./')
+
+app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route('/')
 def root():
