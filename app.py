@@ -24,7 +24,7 @@ app = Flask(__name__, static_url_path='/assets', static_folder='assets', templat
 
 app.config['SESSION_COOKIE_SECURE'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
-app.secret_key = "your_secret_key_here"  # Replace "your_secret_key_here" with an actual secret key
+app.secret_key = "my_secret_key_123"  # Replace "your_secret_key_here" with an actual secret key
 
 @app.route('/')
 def root():
