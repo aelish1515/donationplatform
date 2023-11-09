@@ -24,7 +24,7 @@ app = Flask(__name__, static_url_path='/assets', static_folder='assets', templat
 
 app.config['SESSION_COOKIE_SECURE'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
-app.secret_key = "my_secret_key_123"  # Replace "your_secret_key_here" with an actual secret key
+app.secret_key = "your_secret_key_here"  # Replace "your_secret_key_here" with an actual secret key
 
 @app.route('/')
 def root():
@@ -176,6 +176,24 @@ def list1():
    
    rows = cur.fetchall();
    return render_template("list1.html",rows = rows)
+
+#Donation request form
+@app.route('/submit_donation_request', methods=['POST'])
+def submit_donation_request():
+    if request.method == 'POST':
+        ad_title = request.form['ad_title']
+        ad_description = request.form['ad_description']
+        contact_info = request.form['contact_info']
+        donation_amount = request.form['donation_amount']
+        # Add the data to your database (similar to the 'donation' route)
+        # Assuming the donation requests are stored in a table named 'DonationRequests'
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO DonationRequests (AdTitle, AdDescription, ContactInfo, DonationAmount) VALUES (?,?,?,?)",
+                        (ad_title, ad_description, contact_info, donation_amount))
+            con.commit()
+        return redirect(url_for('confirmation_page'))
+    return "Bad request"
 
 #Display Profile
 @app.route('/profile')
