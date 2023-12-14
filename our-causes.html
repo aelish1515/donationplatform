@@ -62,6 +62,35 @@
                     </ul>
                 </div>
             </div> <!--  /.row -->
+            <!-- Donation Requests Section -->
+<div class="container">
+    <h2>Donation Requests</h2>
+    <div class="row">
+        {% for donation_request in donation_requests %}
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="person-card">
+                <div class="person-content">
+                    <h3><a href="login.html" class="title-white">{{ donation_request['AdTitle'] }}</a></h3>
+                    <p>{{ donation_request['AdDescription'] }}</p>
+                </div>
+                <div class="scale-area">
+                    <h6>Raised</h6>
+                    <h6 class="pull-right">Goal</h6>
+                    <div class="scale clearfix">
+                        <div class="scale-bar-1 " data-percent="72"></div>
+                        <div class="scale-bar-percent">72%</div>
+                    </div>
+                    <h6>{{ donation_request['DonationAmount'] }} USD</h6>
+                    <h6 class="pull-right">112000.00 USD</h6>
+                </div>
+                <div class="buttons">
+                    <a href="login.html" class="red-btn red-btn-4">Donate</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
             <div class="row mb-causes mb-causes-top">
                 <div class="col-md-6 col-sm-12 col-xs-12 center-causes">
